@@ -5,7 +5,7 @@
 class Book : public Item
 {
     public:
-        Book(std::string title, std::string author, int nPages);
+        Book(const std::string& title, const std::string& author, int nPages);
 	    ~Book();
 
         const std::string& getAuthor() const;

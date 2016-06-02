@@ -1,7 +1,7 @@
 #include "memoryleakdetect.h"		// needs to be first #include in the .cpp file
 #include "Book.h"
 
-Book::Book(std::string title, std::string author, int nPages) :
+Book::Book(const std::string& title, const std::string& author, int nPages) :
     Item(title, author, nPages) {
     return;
 }
