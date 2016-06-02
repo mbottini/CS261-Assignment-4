@@ -6,12 +6,44 @@
 
 using namespace std;
 
+typedef std::set<std::string> stringSet;
+
 class Item
 {
-public:
-	Item(const string& title, const string& artist);
-	Item();
-	virtual ~Item();
+    private:
+        std::string _title;
+        std::string _originator;
+        int _quantity;
+        stringSet _collaborators;
+        stringSet _keywords;
+
+        std::string setToString(const stringSet& s) const;
+
+    public:
+        Item(const string& title, const string& artist, int quantity);
+        Item();
+        virtual ~Item();
+
+        // Public getters and setter, accessible by subclasses.
+        const std::string& getTitle() const;
+        const stringSet& getKeywords() const;
+
+        void addKeyword(const std::string& keyword);
+        virtual void print(std::ostream& os) const;
+
+    protected:
+        // Protected getters and setter, only accessible through subclass
+        // wrappers.
+
+        const std::string& getOriginator() const;
+        int getQuantity() const;
+        const stringSet& getCollaborators() const;
+
+        void addCollaborator(const std::string& collaborator);
+
+        // We can't overload the << operator for dereferencing, so instead we
+        // just create a method for printing it this way.
+
 };
 
 // You can't store Item* in an ItemSet, because that would disable the automatic
@@ -40,6 +72,7 @@ private:
 
 public:
 	ItemPtr(Item *ptr) : ptr(ptr) { }
+    ~ItemPtr() { delete ptr; }
 	Item* getPtr() const { return ptr; }
 };
 
@@ -49,6 +82,7 @@ bool operator<(const Item& i1, const Item& i2);
 // compare two instances of ItemPtr
 bool operator<(const ItemPtr& ip1, const ItemPtr& ip2);
 
-ostream& operator<<(ostream& out, const Item* const item);
+ostream& operator<<(ostream& out, const Item& i);
+ostream& operator<<(ostream& out, const ItemPtr& ip);
 
 
