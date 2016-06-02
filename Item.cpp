@@ -1,14 +1,6 @@
 #include "memoryleakdetect.h"		// needs to be first #include in the .cpp file
 #include "Item.h"
 
-std::string Item::setToString(const stringSet& s) const {
-    std::string returnString = "";
-    for(auto i = s.begin(); i != s.end(); ++i) {
-        returnString += *i;
-    }
-
-    return returnString;
-}
 
 Item::Item(const string& title, const string& artist, int quantity)
 {
@@ -70,6 +62,14 @@ void Item::addCollaborator(const std::string& collaborator) {
     _collaborators.insert(collaborator);
 }
 
+std::string Item::setToString(const stringSet& s) const {
+    std::string returnString = "";
+    for(auto i = s.begin(); i != s.end(); ++i) {
+        returnString += *i;
+    }
+
+    return returnString;
+}
 
 bool operator<(const Item& i1, const Item& i2)
 {

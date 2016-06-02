@@ -17,7 +17,6 @@ class Item
         stringSet _collaborators;
         stringSet _keywords;
 
-        std::string setToString(const stringSet& s) const;
 
     public:
         Item(const string& title, const string& artist, int quantity);
@@ -29,6 +28,9 @@ class Item
         const stringSet& getKeywords() const;
 
         void addKeyword(const std::string& keyword);
+
+        // We can't overload the << operator for dereferencing, so instead we
+        // just create a method for printing it this way.
         virtual void print(std::ostream& os) const;
 
     protected:
@@ -41,8 +43,7 @@ class Item
 
         void addCollaborator(const std::string& collaborator);
 
-        // We can't overload the << operator for dereferencing, so instead we
-        // just create a method for printing it this way.
+        std::string setToString(const stringSet& s) const;
 
 };
 

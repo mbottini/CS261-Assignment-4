@@ -1,10 +1,10 @@
 #include <iostream>
 #include "Item.h"
+#include "Book.h"
 #include <set>
 
 int main() {
-    Item i("bob", "dave", 1);
-    ItemPtr ip = new Item("foo", "bar", 25);
+    ItemPtr ip = new Book("foo", "bar", 25);
     std::cout << ip;
     return 0;
 }

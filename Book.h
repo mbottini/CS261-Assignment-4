@@ -1,12 +1,16 @@
 #pragma once
 
-#include "item.h"
+#include "Item.h"
 
-class Book :
-	public Item
+class Book : public Item
 {
-public:
-	Book(void);
-	~Book(void);
+    public:
+        Book(std::string title, std::string author, int nPages);
+	    ~Book();
+
+        const std::string& getAuthor() const;
+        int getPages() const;
+        void print(std::ostream& out) const;
+        
 };
 
