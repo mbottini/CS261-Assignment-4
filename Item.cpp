@@ -71,6 +71,12 @@ std::string Item::setToString(const stringSet& s) const {
     return returnString;
 }
 
+ItemPtr::ItemPtr(ItemPtr&& other) {
+    ptr = other.getPtr();
+    other.setNullPtr();
+    return;
+}
+
 bool operator<(const Item& i1, const Item& i2)
 {
     return i1.getTitle() < i2.getTitle();

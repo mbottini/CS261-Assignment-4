@@ -3,6 +3,7 @@
 #include <ostream>
 #include <set>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -73,8 +74,15 @@ private:
 
 public:
 	ItemPtr(Item *ptr) : ptr(ptr) { }
+    ItemPtr(ItemPtr& other) = delete;
+
+    // Move constructor, necessary to insert into container.
+    ItemPtr(ItemPtr&& other);
+
     ~ItemPtr() { delete ptr; }
 	Item* getPtr() const { return ptr; }
+
+    void setNullPtr() {ptr = NULL;} // DO NOT USE UNLESS MOVING DATA
 };
 
 // compare two instances of Item
