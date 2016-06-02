@@ -30,7 +30,7 @@ void MusicAlbum::addBandMember(const std::string& member) {
 
 void MusicAlbum::print(std::ostream& os) const {
     os << "-Music Album-\n"
-       << "origin:    " << getBand() << "\n"
+       << "band:      " << getBand() << "\n"
        << "# songs:   " << getSongs() << "\n"
        << "members:   " << setToString(getBandMembers()) << "\n"
        << "title:     " << getTitle() << "\n"
