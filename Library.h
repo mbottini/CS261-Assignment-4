@@ -17,7 +17,21 @@ typedef map<string,ItemSet*>	StringToItemSetMap;
 class Library
 {
 private:
+    ItemSet bookSet;
+    ItemSet albumSet;
+    ItemSet movieSet;
 
+    StringToItemSetMap bookAuthorMap;
+
+    StringToItemSetMap albumBandMap;
+    StringToItemSetMap albumMusicianMap;
+
+    StringToItemSetMap movieDirectorMap;
+    StringToItemSetMap movieActorMap;
+
+    StringToItemSetMap keywordMap;
+
+    void mapAdd(StringToItemSetMap& mp, const std::string& word);
 public:
 	// general functions
 	void addKeywordsForItem(const Item* const item, int nKeywords, ...);
@@ -42,6 +56,6 @@ public:
 	const ItemSet* moviesByActor(const string& actor) const;
 	const ItemSet* movies() const;			// returns set containing all the movies
 
-	virtual ~Library();
+	~Library();
 };
 

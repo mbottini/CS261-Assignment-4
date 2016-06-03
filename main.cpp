@@ -3,23 +3,24 @@
 #include "Book.h"
 #include "MusicAlbum.h"
 #include "Movie.h"
-#include <vector>
 #include <string>
+#include <vector>
 
 int main() {
-    std::vector<ItemPtr> ipVec;
+    std::vector<ItemPtr> ipVector1;
+    std::vector<ItemPtr> ipVector2;
 
-    Item *i1 = new Book("foo", "bar", 125);
-    Item *i2 = new MusicAlbum("spam", "eggs", 12);
-    Item *i3 = new Movie("march", "penguins", 5);
+    ipVector1.emplace_back(new Book("spam", "eggs", 251));
+    ipVector2.emplace_back(new MusicAlbum("foo", "bar", 12));
 
-    ipVec.emplace_back(i1);
-    ipVec.emplace_back(i2);
-    ipVec.emplace_back(i3);
-
-    for(auto i = ipVec.begin(); i != ipVec.end(); ++i) {
+    for(auto i = ipVector1.begin(); i != ipVector1.end(); ++i) {
         std::cout << *i;
     }
+
+    for(auto i = ipVector2.begin(); i != ipVector2.end(); ++i) {
+        std::cout << *i;
+    }
+    
 
     return 0;
 }

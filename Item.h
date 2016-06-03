@@ -69,19 +69,31 @@ class Item
 class ItemPtr
 {
 private:
-	Item	*ptr;
+	Item	*_ptr;
+    int *_referenceCount;
+
+    /* Shared pointer. It keeps track of how many containers use it; inserting
+     * it into a container will increase referenceCount by one. Triggering the
+     * destructor will decrease referenceCount by one. Once referenceCount is
+     * equal to 0, the destructor will free the pointer.
+     */
 
 public:
-	ItemPtr(Item *ptr) : ptr(ptr) { }
-    ItemPtr(ItemPtr& other) = delete;
-
-    // Move constructor, necessary to insert into container.
+    ItemPtr();
+	ItemPtr(Item *ptr);
     ItemPtr(ItemPtr&& other);
+    ItemPtr(const ItemPtr& other);
+    ItemPtr& operator =(const ItemPtr& other);
 
-    ~ItemPtr() { delete ptr; }
-	Item* getPtr() const { return ptr; }
+    Item* getPtr() const { return _ptr; };
 
-    void setNullPtr() {ptr = NULL;} // DO NOT USE UNLESS MOVING DATA
+    int* getReferenceCount() const { return _referenceCount; }
+
+    void incrementReferenceCount();
+    void reset();
+
+    ~ItemPtr();
+
 };
 
 // compare two instances of Item

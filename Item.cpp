@@ -71,9 +71,64 @@ std::string Item::setToString(const stringSet& s) const {
     return returnString;
 }
 
+
+ItemPtr::ItemPtr() {
+    _ptr = NULL;
+    _referenceCount = NULL;
+    return;
+}
+
+ItemPtr::ItemPtr(Item *ptr) {
+    _ptr = ptr;
+    _referenceCount = new int(1);
+    return;
+}
+
+ItemPtr::ItemPtr(const ItemPtr& other) {
+    _ptr = NULL;
+    _referenceCount = NULL;
+    *this = other;
+    return;
+}
+
+ItemPtr& ItemPtr::operator =(const ItemPtr& other) {
+    reset();
+    _ptr = other.getPtr();
+    _referenceCount = other.getReferenceCount();
+    incrementReferenceCount();
+    return *this;
+}
+
 ItemPtr::ItemPtr(ItemPtr&& other) {
-    ptr = other.getPtr();
-    other.setNullPtr();
+    _ptr = NULL;
+    _referenceCount = NULL;
+    _ptr = other.getPtr();
+    _referenceCount = other.getReferenceCount();
+    incrementReferenceCount();
+    other.reset();
+    return;
+}
+
+void ItemPtr::incrementReferenceCount() {
+    *(_referenceCount) += 1;
+    return;
+}
+
+void ItemPtr::reset() {
+    if(_referenceCount) {
+        *(_referenceCount) -= 1;
+        if(*(_referenceCount) == 0) {
+            delete _ptr;
+            delete _referenceCount;
+        }
+        _ptr = NULL;
+        _referenceCount = NULL;
+    }
+    return;
+}
+
+ItemPtr::~ItemPtr() {
+    reset();
     return;
 }
 

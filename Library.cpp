@@ -15,23 +15,24 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 	va_start(keywords, nKeywords);
 	for (int i = 0; i < nKeywords; i++) {
 		keyword = va_arg(keywords, char*);
-		// do something with each keyword
+		item->addKeyword(keyword);
+        mapAdd(keywordMap, keyword, item);
 		}
 	va_end(keywords);
 }
 
 const ItemSet* Library::itemsForKeyword(const string& keyword) const
 {
-	// your code here
-	return NULL;
+	return keywordMap[keyword];
 }
 
 // book-related functions
 
 const Item* Library::addBook(const string& title, const string& author, const int nPages)
 {
-	// your code here
-	return NULL;
+	Item *newItem = new Item(title, author, nPages);
+    bookSet.emplace(newItem);
+    return newItem;
 }
 
 const ItemSet* Library::booksByAuthor(const string& author) const
@@ -120,5 +121,15 @@ static void deleteItemSetContents(ItemSet& itemSet)
 
 Library::~Library()
 {
-	// your code here
+    return;
+}
+
+void Library::mapAdd(StringToItemSetMap& mp, const std::string& word, 
+                const Item* item) {
+    if(mp[word] == NULL) {
+        mp[word] = new ItemSet;
+    }
+
+    mp[word].emplace(item);
+    return;
 }
