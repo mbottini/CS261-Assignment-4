@@ -66,6 +66,7 @@ std::string Item::setToString(const stringSet& s) const {
     std::string returnString = "";
     for(auto i = s.begin(); i != s.end(); ++i) {
         returnString += *i;
+        returnString += " ";
     }
 
     return returnString;
@@ -142,16 +143,20 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
     return ip1.getPtr()->getTitle() < ip2.getPtr()->getTitle();    
 }
 
-ostream& operator<<(ostream& out, const Item& i)
-{
-	i.print(out);
-	return out;
-}
-
 ostream& operator<<(ostream& out, const ItemPtr& ip)
 {
     ip.getPtr()->print(out);
     return out;
 }
 
+ostream& operator<<(ostream& out, const Item* ip) {
+    if(ip) {
+        ip->print(out);
+    }
 
+    else {
+        out << "Null pointer reference.\n";
+    }
+
+    return out;
+}

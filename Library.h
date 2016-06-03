@@ -6,6 +6,9 @@
 #include <set>
 #include <string>
 #include "Item.h"
+#include "Book.h"
+#include "MusicAlbum.h"
+#include "Movie.h"
 
 using namespace std;
 
@@ -13,10 +16,13 @@ using namespace std;
 typedef set<string>				StringSet;
 typedef set<ItemPtr>			ItemSet;				// see comment in Item.h about use of ItemPtr
 typedef map<string,ItemSet*>	StringToItemSetMap;
+typedef map<string, ItemPtr>    ItemPtrMap;
 
 class Library
 {
 private:
+    ItemPtrMap titleMap;
+
     ItemSet bookSet;
     ItemSet albumSet;
     ItemSet movieSet;
@@ -31,7 +37,8 @@ private:
 
     StringToItemSetMap keywordMap;
 
-    void mapAdd(StringToItemSetMap& mp, const std::string& word);
+    void mapAdd(StringToItemSetMap& mp, const std::string& word, 
+                    const ItemPtr& itemPtr);
 public:
 	// general functions
 	void addKeywordsForItem(const Item* const item, int nKeywords, ...);
@@ -59,3 +66,6 @@ public:
 	~Library();
 };
 
+bool mapContains(const ItemPtrMap& mp, const std::string& query);
+bool mapContains(const StringToItemSetMap& mp, const std::string& query);
+const ItemSet* getItemSet(const StringToItemSetMap& mp, const string& query);

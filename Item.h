@@ -28,6 +28,7 @@ class Item
         const stringSet& getKeywords() const;
 
         void addKeyword(const std::string& keyword);
+        void addCollaborator(const std::string& collaborator);
 
         // We can't overload the << operator for dereferencing, so instead we
         // just create a method for printing it this way.
@@ -40,8 +41,6 @@ class Item
         const std::string& getOriginator() const;
         int getQuantity() const;
         const stringSet& getCollaborators() const;
-
-        void addCollaborator(const std::string& collaborator);
 
         std::string setToString(const stringSet& s) const;
 
@@ -104,5 +103,6 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2);
 
 ostream& operator<<(ostream& out, const Item& i);
 ostream& operator<<(ostream& out, const ItemPtr& ip);
+ostream& operator<<(ostream& out, const Item* ip);
 
 
