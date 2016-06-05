@@ -74,15 +74,18 @@ private:
     /* Shared pointer. It keeps track of how many containers use it; inserting
      * it into a container will increase referenceCount by one. Triggering the
      * destructor will decrease referenceCount by one. Once referenceCount is
-     * equal to 0, the destructor will free the pointer.
+     * equal to 0, the destructor will free the Item pointer and the
+     * referenceCount pointer.
      */
 
 public:
+    // Rule of 5: ctor, move, copy, assignment operator, dtor.
     ItemPtr();
 	ItemPtr(Item *ptr);
     ItemPtr(ItemPtr&& other);
     ItemPtr(const ItemPtr& other);
     ItemPtr& operator =(const ItemPtr& other);
+    ~ItemPtr();
 
     Item* getPtr() const { return _ptr; };
 
@@ -91,7 +94,6 @@ public:
     void incrementReferenceCount();
     void reset();
 
-    ~ItemPtr();
 
 };
 

@@ -14,7 +14,7 @@ static void printItemSet(ostream& out, const ItemSet *itemSet)
 {
     if (itemSet != NULL && itemSet->size() > 0)
 		for (ItemSet::const_iterator i = itemSet->begin(); i != itemSet->end(); i++)
-			out << i->getPtr();
+			out << i->getPtr() << "\n";
 	else
 		out << "none" << endl << endl;
 }

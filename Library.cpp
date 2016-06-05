@@ -7,8 +7,6 @@
 
 void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 {
-	// the code in this function demonstrates how to handle a vararg in C++
-
 	va_list		keywords;
 	char		*keyword;
 
@@ -37,9 +35,10 @@ const Item* Library::addBook(const string& title, const string& author, const in
         return NULL;
     }
     
+    // We keep these distinct because the main function demands a raw ptr.
     Item *newItem = new Book(title, author, nPages);
-
 	ItemPtr newItemPtr = newItem;
+
     bookSet.insert(newItemPtr);
     mapAdd(bookAuthorMap, author, newItemPtr);
     titleMap.emplace(title, newItemPtr);
@@ -166,7 +165,7 @@ static void deleteMapContents(StringToItemSetMap& s2ism)
 
 static void deleteItemSetContents(ItemSet& itemSet)
 {
-	// None needed thanks to smart pointers.
+	// None needed thanks to ItemPtr destructor.
 }
 
 Library::~Library()
