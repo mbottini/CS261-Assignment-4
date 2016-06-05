@@ -35,14 +35,12 @@ const Item* Library::addBook(const string& title, const string& author, const in
         return NULL;
     }
     
-    // We keep these distinct because the main function demands a raw ptr.
-    Item *newItem = new Book(title, author, nPages);
-	ItemPtr newItemPtr = newItem;
+    ItemPtr newItemPtr = new Book(title, author, nPages);
 
     bookSet.insert(newItemPtr);
     mapAdd(bookAuthorMap, author, newItemPtr);
     titleMap.emplace(title, newItemPtr);
-    return newItem;
+    return newItemPtr.getPtr();
 }
 
 const ItemSet* Library::booksByAuthor(const string& author) const
