@@ -1,6 +1,5 @@
 #include "memoryleakdetect.h"		// needs to be first #include in the .cpp file
 #include <cstdarg>					// support macros for vararg
-#include <iostream>
 #include "Library.h"
 
 // general functions
@@ -31,16 +30,16 @@ const ItemSet* Library::itemsForKeyword(const string& keyword) const
 const Item* Library::addBook(const string& title, const string& author, const int nPages)
 {
     if(mapContains(titleMap, title)) {
-        std::cout << "Title already exists. Aborting.\n";
         return NULL;
     }
     
     ItemPtr newItemPtr = new Book(title, author, nPages);
 
     // The below adds the ItemPtr to BookSet, bookAuthorMap, and titleMap. This
-    // is the primary repetition in my code - every add* method has some
-    // repitition along these lines. I could have created a function that tried
-    // to automate this away, but it would have been a disgusting mess.
+    // is the primary repetition in my code - every addItem method has some
+    // repetition along these lines. I could have created a function that tried
+    // to automate this away, but it would have required me to make
+    // getOriginator a public method.
 
     bookSet.insert(newItemPtr);
     mapAdd(bookAuthorMap, author, newItemPtr);
@@ -64,7 +63,6 @@ const ItemSet* Library::books() const
 const Item* Library::addMusicAlbum(const string& title, const string& band, const int nSongs)
 {
     if(mapContains(titleMap, title)) {
-        std::cout << "Title already exists. Aborting.\n";
         return NULL;
     }
 
@@ -113,7 +111,6 @@ const ItemSet* Library::musicAlbums() const
 const Item* Library::addMovie(const string& title, const string& director, const int nScenes)
 {
     if(mapContains(titleMap, title)) {
-        std::cout << "Title already exists. Aborting.\n";
         return NULL;
     }
 
