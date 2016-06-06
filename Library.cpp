@@ -37,9 +37,15 @@ const Item* Library::addBook(const string& title, const string& author, const in
     
     ItemPtr newItemPtr = new Book(title, author, nPages);
 
+    // The below adds the ItemPtr to BookSet, bookAuthorMap, and titleMap. This
+    // is the primary repetition in my code - every add* method has some
+    // repitition along these lines. I could have created a function that tried
+    // to automate this away, but it would have been a disgusting mess.
+
     bookSet.insert(newItemPtr);
     mapAdd(bookAuthorMap, author, newItemPtr);
     titleMap.emplace(title, newItemPtr);
+
     return newItemPtr.getPtr();
 }
 
@@ -62,13 +68,13 @@ const Item* Library::addMusicAlbum(const string& title, const string& band, cons
         return NULL;
     }
 
-    Item *newItem = new MusicAlbum(title, band, nSongs);
+    ItemPtr newItemPtr = new MusicAlbum(title, band, nSongs);
     
-    ItemPtr newItemPtr = newItem;
     albumSet.insert(newItemPtr);
     mapAdd(albumBandMap, band, newItemPtr);
     titleMap.emplace(title, newItemPtr);
-    return newItem;
+
+    return newItemPtr.getPtr();
 }
 
 void Library::addBandMembers(const Item* const musicAlbum, const int nBandMembers, ...)
@@ -111,13 +117,13 @@ const Item* Library::addMovie(const string& title, const string& director, const
         return NULL;
     }
 
-    Item *newItem = new Movie(title, director, nScenes);
+    ItemPtr newItemPtr = new Movie(title, director, nScenes);
     
-    ItemPtr newItemPtr = newItem;
     movieSet.insert(newItemPtr);
     mapAdd(movieDirectorMap, director, newItemPtr);
     titleMap.emplace(title, newItemPtr);
-    return newItem;
+
+    return newItemPtr.getPtr();
 }
 
 void Library::addCastMembers(const Item* const movie, const int nCastMembers, ...)
@@ -154,8 +160,10 @@ const ItemSet* Library::movies() const
 
 static void deleteMapContents(StringToItemSetMap& s2ism)
 {
+    // Because each SetMap is a dynamically allocated pointer, we have to delete
+    // them.
     for(auto i = s2ism.begin(); i != s2ism.end(); ++i) {
-        delete i->second;
+        delete i->second; // i is a pointer to key-value pairs of the map.
     }
 
     return;
@@ -163,7 +171,7 @@ static void deleteMapContents(StringToItemSetMap& s2ism)
 
 static void deleteItemSetContents(ItemSet& itemSet)
 {
-	// None needed thanks to ItemPtr destructor.
+    return; // None needed thanks to ItemPtr destructor.
 }
 
 Library::~Library()
