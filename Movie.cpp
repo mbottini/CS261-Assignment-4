@@ -13,7 +13,7 @@ Movie::~Movie(void)
 
 void Movie::print(std::ostream& os) const {
     os << "-Movie-\n"
-       << "director   " << getDirector() << "\n"
+       << "director:  " << getDirector() << "\n"
        << "# scenes:  " << getScenes() << "\n"
        << "cast:      " << setToString(getActors()) << "\n"
        << "title:     " << getTitle() << "\n"
