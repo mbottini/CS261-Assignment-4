@@ -162,6 +162,10 @@ const Item* ItemPtr::operator->() const {
     return _ptr;
 }
 
+Item* ItemPtr::operator->() {
+    return _ptr;
+}
+
 // The destructor just calls reset() for the above reason.
 ItemPtr::~ItemPtr() {
     reset();

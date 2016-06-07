@@ -14,7 +14,7 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 	va_start(keywords, nKeywords);
 	for (int i = 0; i < nKeywords; i++) {
 		keyword = va_arg(keywords, char*);
-		foundItem.getPtr()->addKeyword(keyword);
+		foundItem->addKeyword(keyword);
         mapAdd(keywordMap, keyword, foundItem);
 	}
 	va_end(keywords);
@@ -85,7 +85,7 @@ void Library::addBandMembers(const Item* const musicAlbum, const int nBandMember
 	va_start(members, nBandMembers);
 	for (int i = 0; i < nBandMembers; i++) {
 		member = va_arg(members, char*);
-		foundItem.getPtr()->addCollaborator(member);
+		foundItem->addCollaborator(member);
         mapAdd(albumMusicianMap, member, foundItem);
 	}
 	va_end(members);
@@ -133,7 +133,7 @@ void Library::addCastMembers(const Item* const movie, const int nCastMembers, ..
 	va_start(actors, nCastMembers);
 	for (int i = 0; i < nCastMembers; i++) {
 		actor = va_arg(actors, char*);
-		foundItem.getPtr()->addCollaborator(actor);
+		foundItem->addCollaborator(actor);
         mapAdd(movieActorMap, actor, foundItem);
 	}
 	va_end(actors);

@@ -96,6 +96,7 @@ class ItemPtr
 
         // Indirection operator.
         const Item* operator->() const;
+        Item* operator->();
 };
 
 // compare two instances of Item
