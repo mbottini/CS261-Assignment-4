@@ -3,7 +3,7 @@
 Practices polymorphism by implementing an **Item** superclass and three subclasses: **Book**, **MusicAlbum**, and **Movie**. Each
 object has a Title, an Originator (could be an Author, Band, or Director), some sort of Quantity, (pages, songs, scenes) and
 Keywords. Two of the three have Collaborators (actors or band members). All of these need to be separately searchable, 
-so Library.cpp implements a bunch of Sets and Maps to 
+so Library.cpp implements a bunch of Sets and Maps to search according to said criteria.
 
 std::shared_ptr is not allowed, so I rolled my own really rudimentary shared_ptr class for Item objects. It implements a
 reference counter that counts how many times it's copied to some other container.
