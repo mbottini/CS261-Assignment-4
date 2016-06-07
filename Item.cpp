@@ -158,6 +158,10 @@ void ItemPtr::reset() {
     return;
 }
 
+const Item* ItemPtr::operator->() const {
+    return _ptr;
+}
+
 // The destructor just calls reset() for the above reason.
 ItemPtr::~ItemPtr() {
     reset();
@@ -171,14 +175,14 @@ bool operator<(const Item& i1, const Item& i2)
 
 bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
 {
-    return ip1.getPtr()->getTitle() < ip2.getPtr()->getTitle();    
+    return ip1->getTitle() < ip2->getTitle();    
 }
 
 // We call print(out) because virtual operator overloading is frustrating when
 // dealing with the dereferencing. It's easier just to make another function.
 ostream& operator<<(ostream& out, const ItemPtr& ip)
 {
-    ip.getPtr()->print(out);
+    ip->print(out);
     return out;
 }
 
@@ -193,3 +197,5 @@ ostream& operator<<(ostream& out, const Item* ip) {
 
     return out;
 }
+
+

@@ -67,34 +67,35 @@ class Item
 
 class ItemPtr
 {
-private:
-	Item	*_ptr;
-    int *_referenceCount;
+    private:
+	    Item	*_ptr;
+        int *_referenceCount;
 
-    /* Shared pointer. It keeps track of how many containers use it; inserting
-     * it into a container will increase referenceCount by one. Triggering the
-     * destructor will decrease referenceCount by one. Once referenceCount is
-     * equal to 0, the destructor will free the Item pointer and the
-     * referenceCount pointer.
-     */
+        /* Shared pointer. It keeps track of how many containers use it;
+         * inserting it into a container will increase referenceCount by one.
+         * Triggering the destructor will decrease referenceCount by one. Once
+         * referenceCount is equal to 0, the destructor will free the Item
+         * pointer and the referenceCount pointer.
+         */
 
-public:
-    // Rule of 5: ctor, move, copy, assignment operator, dtor.
-    ItemPtr();
-	ItemPtr(Item *ptr);
-    ItemPtr(ItemPtr&& other);
-    ItemPtr(const ItemPtr& other);
-    ItemPtr& operator =(const ItemPtr& other);
-    ~ItemPtr();
+    public:
+        // Rule of 5: ctor, move, copy, assignment operator, dtor.
+        ItemPtr();
+	    ItemPtr(Item *ptr);
+        ItemPtr(ItemPtr&& other);
+        ItemPtr(const ItemPtr& other);
+        ItemPtr& operator =(const ItemPtr& other);
+        ~ItemPtr();
 
-    Item* getPtr() const { return _ptr; };
+        Item* getPtr() const { return _ptr; };
 
-    int* getReferenceCount() const { return _referenceCount; }
+        int* getReferenceCount() const { return _referenceCount; }
 
-    void incrementReferenceCount();
-    void reset();
+        void incrementReferenceCount();
+        void reset();
 
-
+        // Indirection operator.
+        const Item* operator->() const;
 };
 
 // compare two instances of Item
