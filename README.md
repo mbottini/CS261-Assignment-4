@@ -15,3 +15,11 @@ doesn't care. As a result, output must match `diff -w -B asgmt04.output.txt.`
 
 All of the Visual Studio crap was provided by the professor as well, as I have to turn it in as a Visual Studio Project instead
 of tarballing it like a normal person.
+
+Varidic argument template is provided by the teacher. I've never used it before, but it seems to work okay.
+
+Current questions still being asked:
+
+* Is it right to have `getCollaborators` and `setCollaborators` in the superclass, even though **Book** doesn't implement them?
+* Each `addItem` function in Library.cpp has some repetitive code while adding to the various maps. Can that be put into a function?
+* Is it a good idea to just call `deleteMapContents` on every Map? Alternatively, can we add each Map to some sort of container, and then iterate through each vector? I don't know if I would want to do that, though.
